@@ -1,1 +1,1 @@
-# corerental
+# georental
