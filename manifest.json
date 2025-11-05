@@ -1,0 +1,52 @@
+{
+    "manifest_version": 3,
+    "name": "Onespace",
+    "version": "1.0.0",
+    "description": "Onespace is your AI-powered assistant for seamless web interaction.",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "contextMenus",
+        "sidePanel"
+    ],
+    "action": {
+        "default_popup": "src/components/popup/popup.html",
+        "default_icon": {
+            "32": "src/assets/icons8-galaxy-32.svg",
+            "64": "src/assets/icons8-galaxy-64.svg",
+            "96": "src/assets/icons8-galaxy-96.svg",
+            "100": "src/assets/icons8-galaxy-100.svg",
+            "128": "src/assets/icons8-galaxy-128.svg",
+            "256": "src/assets/icons8-galaxy-256.svg"
+        }
+    },
+    "background": {
+        "service_worker": "src/services/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "src/utils/ai-helper.js",
+                "src/contents/content.js"
+            ],
+            "css": [
+                "src/styles/content-styles.css"
+            ]
+        }
+    ],
+    "side_panel": {
+        "default_path": "src/components/sidebar/sidebar.html"
+    },
+    "icons": {
+        "32": "src/assets/icons8-galaxy-32.svg",
+        "64": "src/assets/icons8-galaxy-64.svg",
+        "96": "src/assets/icons8-galaxy-96.svg",
+        "100": "src/assets/icons8-galaxy-100.svg",
+        "128": "src/assets/icons8-galaxy-128.svg",
+        "256": "src/assets/icons8-galaxy-256.svg"
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onespace</title>
+    <link rel="stylesheet" href="../../styles/base-styles.css">
+    <link rel="stylesheet" href="../../styles/popup-styles.css">
+    <link rel="stylesheet" href="../../styles/sidebar-styles.css">
+    <link rel="stylesheet" href="../../styles/toggle-styles.css">
+</head>
+
+<body>
+    <div class="popup-container">
+
+        <div class="popup-header">
+            <img src="../../assets/icons8-galaxy-96.svg" alt="Onespace" class="popup-icon" />
+            <h1 class="popup-title">Onespace</h1>
+            <p class="popup-subtitle">Private. Fast. Insightful.</p>
+        </div>
+
+        <!-- Welcome message for first-time users -->
+        <div id="welcome-message" class="welcome-message">
+            <div class="welcome-hero">
+                <img src="../../assets/icons8-galaxy-96.svg" alt="Overtab" class="welcome-logo" />
+                <h2 class="welcome-title">Welcome to Overtab</h2>
+                <p class="welcome-tagline">Private. Fast. Insightful.</p>
+                <p class="welcome-description">Your AI-powered browsing companion is ready. Let's set it up!</p>
+            </div>
+
+            <button id="welcome-setup-btn" class="welcome-cta-button">
+                <span class="cta-icon">⚙️</span>
+                <span class="cta-text">Configure AI Provider</span>
+                <span class="cta-arrow">→</span>
+            </button>
+
+            <div class="welcome-footer">
+                <p class="welcome-hint">Takes less than a minute</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+
+            <button id="explain-page-btn" class="action-button">
+                <div class="button-icon-wrapper">
+                    <span class="button-icon">📄</span>
+                </div>
+                <div class="button-content">
+                    <span class="button-text">Explain Page</span>
+                    <span class="button-description">Summarize current page</span>
+                </div>
+            </button>
+
+            <button id="voice-command-btn" class="action-button">
+                <div class="button-icon-wrapper">
+                    <span class="button-icon">🎤</span>
+                </div>
+                <div class="button-content">
+                    <span class="button-text">Ask About Page</span>
+                    <span class="button-description">Voice Q&A about this page</span>
+                </div>
+            </button>
+
+            <button id="history-btn" class="action-button">
+                <div class="button-icon-wrapper">
+                    <span class="button-icon">📜</span>
+                </div>
+                <div class="button-content">
+                    <span class="button-text">History</span>
+                    <span class="button-description">View past results</span>
+                </div>
+            </button>
+
+            <button id="settings-btn" class="action-button">
+                <div class="button-icon-wrapper">
+                    <span class="button-icon">⚙️</span>
+                </div>
+                <div class="button-content">
+                    <span class="button-text">Settings</span>
+                    <span class="button-description">Configure AI & API</span>
+                </div>
+            </button>
+
+        </div>
+
+        <div class="feature-toggle">
+            <label class="toggle-container">
+                <input type="checkbox" id="tooltip-toggle" checked>
+                <span class="toggle-slider"></span>
+                <span class="toggle-label">Text Selection Tooltip</span>
+            </label>
+            <span class="toggle-hint">Disable to prevent interruptions</span>
+        </div>
+
+        <div class="status-badge" id="status-badge-container">
+            <div class="status-badge-content">
+                <div class="status-indicator">
+                    <img src="../../assets/icons8-gemini-ai.svg" alt="Gemini" />
+                </div>
+                <span class="status-text" id="ai-status-text">Powered by Gemini Nano</span>
+            </div>
+            <span class="status-badge-label" id="ai-status-label">On-Device AI</span>
+        </div>
+
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal hidden">
+        <div class="settings-modal-content">
+            <div class="settings-header">
+                <h2>⚙️ Settings</h2>
+                <button id="close-settings" class="close-settings-btn">✕</button>
+            </div>
+
+            <div class="settings-body">
+
+                <!-- AI Provider Section -->
+                <div class="settings-section">
+                    <h3>AI Provider Status</h3>
+                    <p class="settings-description">On-device AI availability (Gemini Nano)</p>
+
+                    <div class="ai-status-info">
+                        <span id="gemini-status">Checking Gemini Nano availability...</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="settings-footer">
+            <button id="save-settings" class="save-settings-btn">Save Settings</button>
+        </div>
+    </div>
+    </div>
+
+    <script src="../utils/ai-helper.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>

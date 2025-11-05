@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onespace - Results</title>
+  <link rel="stylesheet" href="../../styles/base-styles.css">
+  <link rel="stylesheet" href="../../styles/sidebar-styles.css">
+  <link rel="stylesheet" href="../../styles/links-styles.css">
+</head>
+
+<body class="sidebar-body">
+
+  <div class="sidebar-container">
+
+    <div class="sidebar-header">
+      <div class="sidebar-branding">
+        <img src="../../assets/icons8-galaxy-96.svg" alt="Onespace" class="sidebar-logo" />
+        <div class="sidebar-title-group">
+          <h1 class="sidebar-title">Onespace</h1>
+          <p class="sidebar-subtitle">Page Insights</p>
+        </div>
+      </div>
+      <button id="clear-btn" class="sidebar-clear-btn" title="Close sidebar">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-tabs">
+      <button class="sidebar-tab active" data-tab="result">
+        <span class="tab-icon">📄</span>
+        <span class="tab-label">Result</span>
+      </button>
+      <button class="sidebar-tab" data-tab="chat">
+        <span class="tab-icon">💬</span>
+        <span class="tab-label">Chat</span>
+      </button>
+      <button class="sidebar-tab" data-tab="links">
+        <span class="tab-icon">🔗</span>
+        <span class="tab-label">Links</span>
+      </button>
+      <button class="sidebar-tab" data-tab="history">
+        <span class="tab-icon">📜</span>
+        <span class="tab-label">History</span>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+
+      <div id="result-tab" class="sidebar-tab-content active">
+
+        <!-- Active processing state (default shown) -->
+        <div id="loading-state" class="sidebar-loading-state">
+          <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">
+              <h4 id="loading-message">Ready to assist...</h4>
+              <div class="loading-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty state (shown if no action after timeout) -->
+        <div id="empty-state" class="sidebar-empty-state hidden">
+          <div class="empty-state-content">
+            <div class="empty-icon">💡</div>
+            <h2>Ready to help</h2>
+            <p class="empty-subtitle">Select text or images on any webpage to get started</p>
+
+            <div class="empty-divider"></div>
+
+            <div class="empty-features">
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Select text → Explain, simplify, translate, or proofread</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Right-click images → Get AI descriptions</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Use voice command → Ask questions instantly</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Links tab → Discover similar resources</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-display" class="sidebar-result-display hidden">
+
+          <!-- Continue conversation button -->
+          <div class="continue-conversation-container hidden" id="continue-conversation-container">
+            <button class="continue-conversation-btn" id="continue-conversation-btn">
+              💬 Continue this conversation
+            </button>
+          </div>
+
+          <!-- Results shown first -->
+          <div class="result-sections">
+
+            <div class="result-section" id="explanation-section">
+              <div class="result-section-header">
+                <span class="result-icon">💡</span>
+                <h3>Explanation</h3>
+                <button class="copy-btn" data-content="explanation" title="Copy to clipboard">📋</button>
+              </div>
+              <div class="result-section-content" id="explanation-content">
+                Result will appear here...
+              </div>
+            </div>
+
+            <div class="result-section hidden" id="simplified-section">
+              <div class="result-section-header">
+                <span class="result-icon">✨</span>
+                <h3>Simplified (Like you're 10)</h3>
+                <button class="copy-btn" data-content="simplified" title="Copy to clipboard">📋</button>
+              </div>
+              <div class="result-section-content" id="simplified-content">
+                Result will appear here...
+              </div>
+            </div>
+
+            <div class="result-section hidden" id="translation-section">
+              <div class="result-section-header">
+                <span class="result-icon">🌐</span>
+                <h3>Translation</h3>
+                <button class="copy-btn" data-content="translation" title="Copy to clipboard">📋</button>
+              </div>
+              <div class="result-section-content" id="translation-content">
+                Result will appear here...
+              </div>
+            </div>
+
+            <div class="result-section hidden" id="proofread-section">
+              <div class="result-section-header">
+                <span class="result-icon">✅</span>
+                <h3>Proofread</h3>
+                <button class="copy-btn" data-content="proofread" title="Copy to clipboard">📋</button>
+              </div>
+              <div class="result-section-content" id="proofread-content">
+                Result will appear here...
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Source shown last (collapsible) -->
+          <div class="result-source">
+            <button class="result-source-toggle" id="source-toggle">
+              <span class="result-source-label">📄 Source Text</span>
+              <span class="toggle-icon">▼</span>
+            </button>
+            <div class="result-source-content" id="source-content">
+              <span id="result-source-text" class="result-source-text">Selected text will appear here</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="chat-tab" class="sidebar-tab-content">
+
+        <div id="chat-empty-state" class="chat-empty-state">
+          <div class="empty-state-content">
+            <div class="empty-icon">💬</div>
+            <h2>Chat with AI</h2>
+            <p class="empty-subtitle">Get a result first, then continue the conversation here</p>
+
+            <div class="empty-divider"></div>
+
+            <div class="empty-features">
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Ask follow-up questions</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Request clarifications</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Explore related topics</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-dot"></span>
+                <span>Get examples and deeper insights</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="chat-messages-container" class="chat-messages-container hidden">
+          <div id="chat-context-badge" class="chat-context-badge">
+            <span class="context-icon">🎯</span>
+            <span class="context-text">Context loaded</span>
+          </div>
+
+          <div id="chat-messages" class="chat-messages">
+            <!-- Messages will be inserted here -->
+          </div>
+        </div>
+
+        <div id="chat-input-container" class="chat-input-container hidden">
+          <div class="chat-input-wrapper">
+            <textarea id="chat-input" class="chat-input" placeholder="Ask a follow-up question..." rows="1"></textarea>
+            <button id="chat-send-btn" class="chat-send-btn" title="Send message">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M2 10L18 2L10 18L8 11L2 10Z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+          <div class="chat-actions">
+            <button id="chat-clear-btn" class="chat-action-btn" title="Clear conversation">
+              🗑️ Clear
+            </button>
+            <button id="chat-new-btn" class="chat-action-btn" title="Start fresh">
+              ✨ New Chat
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="links-tab" class="sidebar-tab-content">
+
+        <div id="links-empty-state" class="links-empty-state">
+          <div class="empty-icon">🔗</div>
+          <h2>Discover Similar Resources</h2>
+          <p>Find AI-powered recommendations for any topic you're researching.</p>
+          <div class="links-search-container">
+            <label for="links-topic-input" class="links-search-label">What would you like to find links about?</label>
+            <input type="text" id="links-topic-input" class="links-topic-input"
+              placeholder="E.g., Machine Learning, React Tutorial, Climate Change..." />
+            <button id="generate-links-btn" class="generate-links-btn">
+              ✨ Find Links
+            </button>
+          </div>
+        </div>
+
+        <div id="links-loading-state" class="links-loading-state hidden">
+          <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">
+              <h4>Finding similar resources...</h4>
+              <div class="loading-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="links-display" class="links-display hidden">
+          <div class="links-header">
+            <h3>Similar Resources</h3>
+            <button id="refresh-links-btn" class="refresh-links-btn" title="Refresh links">
+              🔄
+            </button>
+          </div>
+          <div class="links-context">
+            <div class="links-context-content">
+              <span class="links-context-label">Topic:</span>
+              <span id="links-page-title" class="links-page-title"></span>
+            </div>
+            <button id="edit-links-topic-btn" class="edit-links-topic-btn" title="Change topic">
+              ✏️ Edit
+            </button>
+          </div>
+          <div id="links-list" class="links-list">
+            <!-- Links will be inserted here -->
+          </div>
+        </div>
+
+      </div>
+
+      <div id="history-tab" class="sidebar-tab-content">
+
+        <div id="history-empty-state" class="history-empty-state">
+          <div class="empty-icon">📜</div>
+          <h2>No history yet</h2>
+          <p>Your recent explanations will appear here.</p>
+        </div>
+
+        <div id="history-list" class="sidebar-history-list hidden"></div>
+
+        <button id="clear-history-btn" class="sidebar-clear-history-btn hidden">
+          Clear All History
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-badge">
+        <div class="status-indicator">
+          <img id="sidebar-ai-icon" src="../../assets/icons8-gemini-ai.svg" alt="Gemini" />
+        </div>
+        <span class="status-text" id="sidebar-status-text">Powered by Gemini Nano</span>
+        <span class="status-badge-label" id="sidebar-status-label">ON-DEVICE</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../../utils/storage-manager.js"></script>
+  <script src="../../utils/ai-helper.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+
+</html>
